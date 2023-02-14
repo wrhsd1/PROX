@@ -51,6 +51,21 @@ func Proxy(c *gin.Context) {
 			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
 			return
 		}
+	} else if c.Request.Method == "PATCH" {
+		req, err = http.NewRequest("PATCH", url, c.Request.Body)
+		if err != nil {
+			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
+			return
+		}
+	} else if c.Request.Method == "DELETE" {
+		req, err = http.NewRequest("DELETE", url, c.Request.Body)
+		if err != nil {
+			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
+			return
+		}
+	} else {
+		c.JSON(500, gin.H{"message": "Internal server error", "error": "Invalid HTTP method"})
+		return
 	}
 	// Add headers
 	for key, value := range c.Request.Header {
