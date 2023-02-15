@@ -66,9 +66,21 @@ func main() {
 	// CORS middleware
 	cors_config := cors.DefaultConfig()
 	cors_config.AllowAllOrigins = true
+	cors_config.AllowCredentials = true
+
+	// Set Access-Control-Allow-Credentials headers and allow all origins
+	handler.Use(func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "duti.tech")
+		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		// Allow ALL CORS
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
+		c.Next()
+	})
 
 	handler.Use(cors.New(cors_config))
-	handler.Use(secret_auth)
+
+	handler.Use(cors.New(cors_config))
+	// handler.Use(secret_auth)
 	// Proxy all requests to /* to proxy if not already handled
 	handler.Any("/*path", handlers.Proxy)
 
