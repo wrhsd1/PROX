@@ -8,6 +8,7 @@ import (
 	"github.com/acheong08/ChatGPT-V2/internal/api"
 	"github.com/acheong08/ChatGPT-V2/internal/handlers"
 	"github.com/fvbock/endless"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -62,6 +63,11 @@ func main() {
 	if !api.Config.Private {
 		handler.Use(limit_middleware)
 	}
+	// CORS middleware
+	cors_config := cors.DefaultConfig()
+	cors_config.AllowAllOrigins = true
+
+	handler.Use(cors.New(cors_config))
 	handler.Use(secret_auth)
 	// Proxy all requests to /* to proxy if not already handled
 	handler.Any("/*path", handlers.Proxy)
