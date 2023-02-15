@@ -87,6 +87,9 @@ func Proxy(c *gin.Context) {
 	}
 	// Stream response to client
 	defer resp.Body.Close()
+	// Set content type as text/event-stream
+	c.Header("Content-Type", "text/event-stream")
+
 	// Return stream of data to client
 	c.Stream(func(w io.Writer) bool {
 		// Write data to client
