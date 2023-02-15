@@ -27,7 +27,7 @@ func init() {
 }
 
 func Proxy(c *gin.Context) {
-	// Proxy all requests directly to https://apps.openai.com/api/* streamed
+	// Proxy all requests directly to endpoint
 	url := Config.Endpoint + c.Param("path")
 	// POST request with all data and headers
 	var req *http.Request
