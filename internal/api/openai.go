@@ -2,7 +2,6 @@ package api
 
 import (
 	_ "embed"
-	"encoding/base64"
 	"encoding/json"
 	"io"
 	"log"
@@ -22,20 +21,14 @@ var (
 // config returns the config.json file as a Config struct.
 func init() {
 	Config = types.Config{}
-	// Base64 decode config.json
-	decoded_config, err := base64.StdEncoding.DecodeString(string(config_file))
-	if err != nil {
-		print(err)
-		panic(err)
-	}
-	if json.Unmarshal(decoded_config, &Config) != nil {
+	if json.Unmarshal(config_file, &Config) != nil {
 		log.Fatal("Error unmarshalling config.json")
 	}
 }
 
 func Proxy(c *gin.Context) {
 	// Proxy all requests directly to https://apps.openai.com/api/* streamed
-	url := "https://apps.openai.com" + c.Param("path")
+	url := Config.Endpoint + c.Param("path")
 	// POST request with all data and headers
 	var req *http.Request
 	var err error
