@@ -66,5 +66,5 @@ func main() {
 	// Proxy all requests to /* to proxy if not already handled
 	handler.Any("/*path", handlers.Proxy)
 
-	endless.ListenAndServe("127.0.0.1:"+PORT, handler)
+	endless.ListenAndServe(":"+PORT, handler)
 }
