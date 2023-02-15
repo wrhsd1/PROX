@@ -56,7 +56,7 @@ func secret_auth(c *gin.Context) {
 func main() {
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
-		PORT = "10101"
+		PORT = "8080"
 	}
 	handler := gin.Default()
 	if !api.Config.Private {
