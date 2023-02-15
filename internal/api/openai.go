@@ -57,11 +57,13 @@ func Proxy(c *gin.Context) {
 			return
 		}
 	} else if c.Request.Method == "OPTIONS" {
-		req, err = http.NewRequest("OPTIONS", url, c.Request.Body)
-		if err != nil {
-			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
-			return
-		}
+		// Immediately return 200 OK with OPTIONS headers
+		c.Header("Access-Control-Allow-Origin", "https://duti.tech")
+		c.Header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
+		c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Header("Access-Control-Allow-Credentials", "true")
+		c.JSON(200, gin.H{"message": "OK"})
+		return
 	} else {
 		c.JSON(500, gin.H{"message": "Internal server error", "error": "Invalid HTTP method"})
 		return
