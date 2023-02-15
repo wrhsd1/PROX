@@ -9,7 +9,6 @@ import (
 	"github.com/acheong08/ChatGPT-V2/internal/handlers"
 	"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-redis/redis/v8"
 )
 
 var limit_middleware gin.HandlerFunc
