@@ -41,18 +41,6 @@ func init() {
 	)
 }
 
-func secret_auth(c *gin.Context) {
-	if os.Getenv("SECRET") == "" {
-		return
-	}
-	auth_header := c.GetHeader("Secret")
-	if auth_header != os.Getenv("SECRET") {
-		c.JSON(401, gin.H{"message": "Unauthorized"})
-		c.Abort()
-		return
-	}
-}
-
 func main() {
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
@@ -62,18 +50,11 @@ func main() {
 	if !api.Config.Private {
 		handler.Use(limit_middleware)
 	}
-
-	// Set Access-Control-Allow-Credentials headers and allow all origins
-	handler.Use(func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "https://images.duti.tech")
-		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		// Allow ALL CORS
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
-		c.Next()
+	handler.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{"message": "pong"})
 	})
-	// handler.Use(secret_auth)
 	// Proxy all requests to /* to proxy if not already handled
-	handler.Any("/*path", handlers.Proxy)
+	handler.Any("/api/*path", handlers.Proxy)
 
 	endless.ListenAndServe(":"+PORT, handler)
 }
