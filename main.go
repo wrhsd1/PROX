@@ -65,7 +65,7 @@ func main() {
 
 	// Set Access-Control-Allow-Credentials headers and allow all origins
 	handler.Use(func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "https://duti.tech")
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "https://images.duti.tech")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		// Allow ALL CORS
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "*")
