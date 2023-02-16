@@ -58,7 +58,7 @@ func Proxy(c *gin.Context) {
 		}
 	} else if c.Request.Method == "OPTIONS" {
 		// Immediately return 200 OK with OPTIONS headers
-		c.Header("Access-Control-Allow-Origin", "https://duti.tech")
+		c.Header("Access-Control-Allow-Origin", "https://images.duti.tech")
 		c.Header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 		c.Header("Access-Control-Allow-Credentials", "true")
