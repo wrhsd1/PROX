@@ -29,7 +29,7 @@ func init() {
 
 func Proxy(c *gin.Context) {
 	// Proxy all requests directly to endpoint
-	url := Config.Endpoint + c.Param("path")
+	url := Config.Endpoint + "/api" + c.Param("path")
 	// POST request with all data and headers
 	var req *http.Request
 	var err error
