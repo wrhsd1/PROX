@@ -5,7 +5,6 @@ import (
 	"time"
 
 	ratelimit "github.com/JGLTechnologies/gin-rate-limit"
-	"github.com/acheong08/ChatGPT-V2/internal/api"
 	"github.com/acheong08/ChatGPT-V2/internal/handlers"
 	"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
@@ -47,7 +46,7 @@ func main() {
 		PORT = "8080"
 	}
 	handler := gin.Default()
-	if !api.Config.Private {
+	if !handlers.Config.Private {
 		handler.Use(limit_middleware)
 	}
 	handler.GET("/ping", func(c *gin.Context) {
