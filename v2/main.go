@@ -46,5 +46,5 @@ func main() {
 	})
 
 	// start the server on port 8080
-	log.Fatal(endless.ListenAndServe(":8080", nil))
+	endless.ListenAndServe(":8080", nil)
 }
