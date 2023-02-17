@@ -34,6 +34,11 @@ func main() {
 		Host:   C.Endpoint,
 	})
 
+	// /ping returns 200 OK
+	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
 	// create a handler for the reverse proxy
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// update the headers to allow for SSL redirection

@@ -15,5 +15,4 @@
 # vendor/
 internal/api/config.*
 internal/handlers/config.json
-ChatGPT-V2
 v2/config.json
