@@ -46,14 +46,14 @@ func main() {
 		PORT = "8080"
 	}
 	handler := gin.Default()
-	if !handlers.Config.Private {
-		handler.Use(limit_middleware)
-	}
 	handler.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{"message": "pong"})
 	})
-	// Proxy all requests to /* to proxy if not already handled
-	handler.Any("/api/*path", handlers.Proxy)
+	if !handlers.Config.Private {
+		handler.Any("/api/*path", limit_middleware, handlers.Proxy)
+	} else {
+		handler.Any("/api/*path", handlers.Proxy)
+	}
 
 	endless.ListenAndServe(":"+PORT, handler)
 }
