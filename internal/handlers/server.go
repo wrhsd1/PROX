@@ -40,25 +40,25 @@ func Proxy(c *gin.Context) {
 	if c.Request.Method == "POST" {
 		req, err = http.NewRequest("POST", url, c.Request.Body)
 		if err != nil {
-			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
+			c.JSON(500, gin.H{"message": "Internal server error"})
 			return
 		}
 	} else if c.Request.Method == "GET" {
 		req, err = http.NewRequest("GET", url, nil)
 		if err != nil {
-			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
+			c.JSON(500, gin.H{"message": "Internal server error"})
 			return
 		}
 	} else if c.Request.Method == "PATCH" {
 		req, err = http.NewRequest("PATCH", url, c.Request.Body)
 		if err != nil {
-			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
+			c.JSON(500, gin.H{"message": "Internal server error"})
 			return
 		}
 	} else if c.Request.Method == "DELETE" {
 		req, err = http.NewRequest("DELETE", url, c.Request.Body)
 		if err != nil {
-			c.JSON(500, gin.H{"message": "Internal server error", "error": err})
+			c.JSON(500, gin.H{"message": "Internal server error"})
 			return
 		}
 	} else if c.Request.Method == "OPTIONS" {
@@ -82,7 +82,7 @@ func Proxy(c *gin.Context) {
 	client := &http.Client{Timeout: time.Second * 360}
 	resp, err := client.Do(req)
 	if err != nil {
-		c.JSON(500, gin.H{"message": "Internal server error", "error": err})
+		c.JSON(500, gin.H{"message": "Internal server error"})
 		return
 	}
 	// Stream response to client
