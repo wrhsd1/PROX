@@ -28,10 +28,6 @@ func init() {
 }
 
 func Proxy(c *gin.Context) {
-	// c.Header("Access-Control-Allow-Origin", "https://images.duti.tech")
-	// c.Header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
-	// c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
-	// c.Header("Access-Control-Allow-Credentials", "true")
 	// Proxy all requests directly to endpoint
 	url := Config.Endpoint + "/api" + c.Param("path")
 	// POST request with all data and headers
