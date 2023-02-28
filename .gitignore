@@ -13,6 +13,3 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
-internal/api/config.*
-internal/handlers/config.json
-v2/config.json
