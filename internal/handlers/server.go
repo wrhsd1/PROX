@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"crypto/tls"
 	_ "embed"
 	"encoding/json"
 	"io"
@@ -28,6 +29,7 @@ func init() {
 }
 
 func Proxy(c *gin.Context) {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	// Proxy all requests directly to endpoint
 	url := Config.Endpoint + "/api" + c.Param("path")
 	// POST request with all data and headers
