@@ -23,6 +23,7 @@ var (
 )
 
 func init() {
+	// Set up the rate limiter middleware using an in-memory store
 	limitStore = ratelimit.InMemoryStore(
 		&ratelimit.InMemoryOptions{
 			Rate:  time.Minute,
@@ -32,6 +33,7 @@ func init() {
 	limitMiddleware = ratelimit.RateLimiter(
 		limitStore,
 		&ratelimit.Options{
+			// Handler to use when the request rate is exceeded
 			ErrorHandler: func(c *gin.Context, info ratelimit.Info) {
 				c.JSON(
 					http.StatusTooManyRequests,
@@ -41,6 +43,7 @@ func init() {
 				)
 				c.Abort()
 			},
+			// Key function to use for rate limiting
 			KeyFunc: func(c *gin.Context) string {
 				return c.ClientIP()
 			},
@@ -49,6 +52,7 @@ func init() {
 }
 
 func secretAuth() gin.HandlerFunc {
+	// Middleware function to authenticate secret header
 	return func(c *gin.Context) {
 		if secret := os.Getenv("SECRET"); secret != "" {
 			authHeader := c.GetHeader("Secret")
@@ -63,22 +67,27 @@ func secretAuth() gin.HandlerFunc {
 }
 
 func main() {
+	// Get the port to use from the PORT environment variable, or use the default port
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = DEFAULT_PORT
 	}
 
+	// Set up the Gin router with logging and middleware
 	handler := gin.Default()
 
+	// Add rate limiter middleware if the API is public
 	if !api.Config.Private {
 		handler.Use(limitMiddleware)
 	}
 
+	// Add secret authentication middleware
 	handler.Use(secretAuth())
 
 	// Proxy all requests to /* to proxy if not already handled
 	handler.Any("/*path", handlers.Proxy)
 
+	// Use endless package to listen on the specified port
 	err := endless.ListenAndServe(":"+port, handler)
 	if err != nil {
 		log.Fatalf("Failed to start server: %v", err)
