@@ -1,0 +1,11 @@
+{
+    "endpoint": "https://api.example.com/gpt",
+    "model": "gpt2",
+    "mappings": {
+        "hello": "Hi there!",
+        "goodbye": "See you later!",
+        "thanks": "You're welcome!"
+    },
+    "secret_model": "gpt3",
+    "private": true
+}
