@@ -4,6 +4,8 @@
 
 To run the proxy server using Docker, you can use the following command:
 
+`make run-docker`
+
 Alternatively, you can run the following command to start the Docker container manually:
 
 ```bash
