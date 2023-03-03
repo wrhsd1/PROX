@@ -30,6 +30,11 @@ func init() {
 
 func Proxy(c *gin.Context) {
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+	// Add CORS headers
+	c.Header("Access-Control-Allow-Origin", "images.duti.tech")
+	c.Header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
+	c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	// Proxy all requests directly to endpoint
 	url := Config.Endpoint + "/api" + c.Param("path")
 	// POST request with all data and headers

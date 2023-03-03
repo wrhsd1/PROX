@@ -20,5 +20,5 @@ func main() {
 
 	handler.Any("/api/*path", handlers.Proxy)
 
-	endless.ListenAndServe(":"+PORT, handler)
+	endless.ListenAndServe("127.0.0.1:"+PORT, handler)
 }
