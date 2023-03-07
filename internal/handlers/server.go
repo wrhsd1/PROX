@@ -32,6 +32,7 @@ func Proxy(c *gin.Context) {
 	// Check if Authorization header is set
 	if c.Request.Header.Get("Authorization") == "" {
 		c.JSON(401, gin.H{"message": "Unauthorized"})
+		return
 	}
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	// Add CORS headers
