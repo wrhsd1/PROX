@@ -1,4 +1,4 @@
-module github.com/acheong08/ChatGPT-V2
+module github.com/RunawayVPN/PROX/temp2
 
 go 1.19
 
