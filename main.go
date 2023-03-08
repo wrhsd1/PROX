@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/acheong08/ChatGPT-V2/internal/handlers"
+	"github.com/RunawayVPN/PROX/temp2/internal/handlers"
 	"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 )

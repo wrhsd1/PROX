@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/acheong08/ChatGPT-V2/internal/types"
+	"github.com/RunawayVPN/PROX/temp2/internal/types"
 
 	"github.com/gin-gonic/gin"
 )
